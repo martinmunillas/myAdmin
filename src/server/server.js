@@ -9,6 +9,8 @@ const { PORT, ENV } = process.env;
 
 const app = express();
 
+app.use(express.json())
+
 if(ENV == 'development') {
     console.log('Running on development')
 } else {
