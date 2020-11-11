@@ -1,0 +1,24 @@
+@import '../../../Vars.scss';
+
+.navBar {
+  width: $navBarWidth;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #292a2e;
+  color: #ffffff;
+  border-radius: 0 10px 10px 0;
+
+  &__item {
+      font-size: 1.3rem;
+      padding: 10px;
+      margin: 5px;
+      border-radius: 10px;
+
+      &--active {
+          background-color: #222222;
+      }
+  }
+}

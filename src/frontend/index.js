@@ -17,6 +17,8 @@ const store = createStore(
   compose(applyMiddleware(thunk))
 );
 
+import './main.scss'
+
 ReactDOM.hydrate(
   <Provider store={store}>
     <Router history={history}>

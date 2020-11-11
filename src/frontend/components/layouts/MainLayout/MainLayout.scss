@@ -1,0 +1,7 @@
+@import '../../../Vars.scss';
+
+.mainLayout {
+    &__children {
+        margin-left: $navBarWidth;
+    }
+}

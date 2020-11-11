@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 
 import api from './apps/api'
+import ssr from './apps/ssr'
 
 dotenv.config();
 const { PORT, ENV } = process.env;
@@ -18,6 +19,7 @@ if(ENV == 'development') {
 }
 
 app.use('/api', api);
+app.use('/', ssr);
 
 app.listen(PORT, () => {
   console.log(`Server listeneing on port ${PORT}`);

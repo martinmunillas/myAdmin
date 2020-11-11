@@ -12,13 +12,15 @@ const { ENV } = process.env;
 const isDev = ENV === 'development';
 const entry = ['./src/frontend/index.js'];
 
-
+if (isDev) {
+  entry.push('webpack-hot-middleware/client');
+}
 
 module.exports = {
   entry,
   mode: ENV,
   output: {
-    path: path.resolve(__dirname, 'src/server/ssr/public'),
+    path: path.resolve(__dirname, 'src/server/apps/ssr/public'),
     filename: isDev ? 'build/app.js' : 'build/app-[hash].js',
     publicPath: '/',
   },
@@ -58,14 +60,9 @@ module.exports = {
 
     !isDev ? new ManifestPlugin() : () => {},
 
-    !isDev
-      ? new CleanWebpackPlugin({
-          cleanOnceBeforeBuildPatterns: path.resolve(
-            __dirname,
-            'src/server/public/build'
-          ),
-        })
-      : () => {},
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public/build'),
+    }),
 
     new MiniCssExtractPlugin({
       filename: isDev ? 'build/app.css' : 'build/app-[hash].css',
