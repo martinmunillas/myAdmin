@@ -1,0 +1,25 @@
+.box {
+  border-radius: 20px;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  
+  &__primary {
+  }
+
+  &__secondary {
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  &__column {
+    flex-direction: column;
+  }
+
+  &__row {
+    flex-direction: row;
+  }
+}

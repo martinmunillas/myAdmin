@@ -5,7 +5,7 @@ import MainLayout from '../components/layouts/MainLayout/MainLayout';
 const Home = () => {
   return (
     <MainLayout>
-      <Title>Hello World</Title>
+      <Title blue>Hello Admin</Title>
     </MainLayout>
   );
 };

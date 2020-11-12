@@ -1,0 +1,23 @@
+@import '../../../Vars.scss';
+
+.button {
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-weight: 600;
+  min-width: 100px;
+  max-width: 300px;
+  margin-top: 10px;
+  font-size: 18px;
+
+  &__primary {
+    color: white;
+  }
+
+  &__secondary {
+  }
+
+  &__tertiary {
+    background: none;
+    text-decoration: underline;
+  }
+}

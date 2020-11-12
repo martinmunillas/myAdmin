@@ -1,5 +1,7 @@
+@import './Vars.scss';
+
 body {
-  background-color: #30333a;
+  background-color: $blackColor;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -7,9 +9,76 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: $whiteColor;
 }
 
 a {
   text-decoration: none;
-  color: #ffffff
+  color: $whiteColor;
+}
+
+button,
+input {
+  outline: none;
+  border: none;
+}
+
+.red {
+  color: $redColor;
+}
+
+.blue {
+  color: $blueColor;
+}
+
+.yellow {
+  color: $yellowColor;
+}
+
+.white {
+  color: $whiteColor;
+}
+
+.black {
+  color: $blackColor;
+}
+
+.redBackground {
+  background-color: $redColor;
+}
+
+.blueBackground {
+  background-color: $blueColor;
+}
+
+.yellowBackground {
+  background-color: $yellowColor;
+}
+
+.whiteBackground {
+  background-color: $whiteColor;
+}
+
+.blackBackground {
+  background-color: $blackColor;
+}
+
+.redBorder {
+  border-color: $redColor;
+}
+
+.blueBorder {
+  border-color: $blueColor;
+}
+
+.yellowBorder {
+  border-color: $yellowColor;
+}
+
+.whiteBorder {
+  border-color: $whiteColor;
+}
+
+.blackBorder {
+  border-color: $blackColor;
 }

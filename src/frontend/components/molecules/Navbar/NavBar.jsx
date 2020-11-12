@@ -6,7 +6,7 @@ import './NavBar.scss';
 const NavBar = () => {
   return (
       <nav className='navBar'>
-        <Link className='navBar__item navBar__item--active' to='/home'>Home</Link>
+        <Link className='navBar__item navBar__item--active' to='/'>Home</Link>
         <Link className='navBar__item' to='/projects'>Projects</Link>
         <Link className='navBar__item' to='/messages'>Messages</Link>
         <Link className='navBar__item' to='/ideas'>Ideas</Link>

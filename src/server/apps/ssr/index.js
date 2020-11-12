@@ -2,10 +2,10 @@ import express from 'express';
 import React from 'react';
 import { createStore } from 'redux';
 import { renderToString } from 'react-dom/server';
-import { Route, StaticRouter } from 'react-router-dom';
+import { Route, StaticRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import dotenv from 'dotenv';
-import webpack from 'webpack';
+import axios from 'axios';
 
 import routes from '../../../frontend/routes/routes';
 import reducer from '../../../frontend/redux/reducer';
@@ -13,13 +13,31 @@ import reducer from '../../../frontend/redux/reducer';
 dotenv.config();
 const router = express.Router();
 
-if (process.env.ENV === 'development') {
+const { ENV, URL } = process.env;
+const isDev = ENV === 'development';
+
+if (isDev) {
+  const webpack = require('webpack');
   const webpackConfig = require('../../../../webpack.config.js');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
-  router.use(webpackDevMiddleware(compiler, {}));
-  router.use(webpackHotMiddleware(compiler));
+  router.use(
+    webpackDevMiddleware(compiler, {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath,
+      stats: { colors: true },
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: true,
+      },
+    })
+  );
+  router.use(
+    webpackHotMiddleware(compiler, {
+      log: console.log,
+    })
+  );
 }
 
 const setResponse = (html, preloadedState, manifest) => {
@@ -47,16 +65,34 @@ const setResponse = (html, preloadedState, manifest) => {
           </html>`;
 };
 
-const renderApp = (req, res) => {
-  const initialState = { projects: [{ name: 'Muniflix' }] };
+const renderApp = async (req, res) => {
+  const getInitialState = async () => {
+    try {
+      const projects = await axios({
+        method: 'GET',
+        url: `${URL}/api/projects`,
+      });
+      return {
+        projects: projects.data.data,
+      };
+    } catch (error) {
+      if (isDev) {
+        console.log(error);
+      }
+      return {};
+    }
+  };
+  const initialState = await getInitialState();
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
-        {routes.map((route, i) => (
-          <Route {...route} key={i} />
-        ))}
+        <Switch>
+          {routes.map((route) => (
+            <Route {...route} key={route.path} />
+          ))}
+        </Switch>
       </StaticRouter>
     </Provider>
   );
@@ -64,6 +100,14 @@ const renderApp = (req, res) => {
   res.send(setResponse(html, preloadedState, req.hashManifest));
 };
 
-router.use('*', renderApp);
+const checkAuth = (req, res, next) => {
+  if (req.url === '/') {
+    res.redirect('/sign-in');
+  } else {
+    next();
+  }
+};
+
+router.use([checkAuth, renderApp]);
 
 export default router;

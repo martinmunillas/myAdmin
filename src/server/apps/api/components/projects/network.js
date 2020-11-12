@@ -11,7 +11,7 @@ require('../../utils/auth/jwt');
 
 router.get(
   '/',
-  passport.authenticate('jwt', { session: false }),
+  // passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
       const projects = await service.getProjects();
