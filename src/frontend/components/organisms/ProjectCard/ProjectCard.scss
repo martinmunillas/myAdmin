@@ -1,0 +1,31 @@
+.projectCard {
+  width: 100%;
+  margin: 500px 0;
+  height: 350px;
+
+  img {
+    width: 40%;
+    height: 350px;
+    object-fit: cover;
+    object-position: 0 0;
+    border-radius: 50px;
+  }
+
+  &__content {
+    margin-left: 50px ;
+    height: inherit;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    p {
+      font-size: 25px;
+    }
+
+    &__button {
+      align-self: flex-end;
+      justify-self: flex-end;
+    }
+  }
+}

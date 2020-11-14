@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from '../components/atoms/Title/Title';
+import Title from '../components/atoms/Title';
 import MainLayout from '../components/layouts/MainLayout/MainLayout';
 
 const Home = () => {

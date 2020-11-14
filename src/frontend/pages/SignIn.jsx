@@ -1,15 +1,15 @@
 import React from 'react';
 
 import SignInForm from '../components/organisms/SignInForm/SignInForm';
-import Title from '../components/atoms/Title/Title';
-import Box from '../components/atoms/Box/Box';
+import Title from '../components/atoms/Title';
+import Box from '../components/atoms/Box';
 import SpacedLayout from '../components/layouts/SpacedLayout/SpacedLayout';
 
 const SignIn = () => {
   return (
     <>
       <SpacedLayout>
-        <Box color='white'>
+        <Box color='white' type='secondary'>
           <Title color='yellow'>Sign In!</Title>
           <SignInForm />
         </Box>
