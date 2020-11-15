@@ -68,11 +68,14 @@ const setResponse = (html, preloadedState, manifest) => {
 
 const renderApp = async (req, res) => {
   const getInitialState = async () => {
-    const { name, email, id } = req.cookies;
     try {
+      const { name, email, id, token } = req.cookies;
       const projects = await axios({
         method: 'GET',
         url: `${URL}/api/projects`,
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
       return {
         user: { name, email, id },
