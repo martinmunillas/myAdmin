@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser'
 
 import api from './apps/api';
 import ssr from './apps/ssr';
@@ -11,6 +12,7 @@ const { PORT, ENV } = process.env;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 if (ENV == 'development') {
   console.log('Running on development');

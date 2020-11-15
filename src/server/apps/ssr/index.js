@@ -6,6 +6,7 @@ import { Route, StaticRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import dotenv from 'dotenv';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 import routes from '../../../frontend/routes/routes';
 import reducer from '../../../frontend/redux/reducer';
@@ -13,7 +14,7 @@ import reducer from '../../../frontend/redux/reducer';
 dotenv.config();
 const router = express.Router();
 
-const { ENV, URL } = process.env;
+const { ENV, URL, AUTH_JWT } = process.env;
 const isDev = ENV === 'development';
 
 if (isDev) {
@@ -67,12 +68,14 @@ const setResponse = (html, preloadedState, manifest) => {
 
 const renderApp = async (req, res) => {
   const getInitialState = async () => {
+    const { name, email, id } = req.cookies;
     try {
       const projects = await axios({
         method: 'GET',
         url: `${URL}/api/projects`,
       });
       return {
+        user: { name, email, id },
         projects: projects.data.data,
       };
     } catch (error) {
@@ -100,11 +103,21 @@ const renderApp = async (req, res) => {
   res.send(setResponse(html, preloadedState, req.hashManifest));
 };
 
-const checkAuth = (req, res, next) => {
-  if (req.url === '/') {
-    res.redirect('/sign-in');
+const checkAuth = async (req, res, next) => {
+  if (req.url !== '/sign-in') {
+    try {
+      await jwt.verify(req.cookies.token, AUTH_JWT);
+      next();
+    } catch (error) {
+      res.redirect('/sign-in');
+    }
   } else {
-    next();
+    try {
+      await jwt.verify(req.cookies.token, AUTH_JWT);
+      res.redirect('/');
+    } catch (error) {
+      next();
+    }
   }
 };
 

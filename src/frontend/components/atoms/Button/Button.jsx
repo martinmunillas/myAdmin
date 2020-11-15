@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Button.scss';
 
-const Button = ({ children, onClick, level, color, className }) => {
+const Button = ({ children, type, level, color, className }) => {
   const getClasses = () => {
     let finalClass = 'button button';
     if (level === 'secondary') {
@@ -20,7 +20,7 @@ const Button = ({ children, onClick, level, color, className }) => {
 
     return finalClass;
   };
-  return <button className={getClasses()}>{children}</button>;
+  return <button className={getClasses()} type={type}>{children}</button>;
 };
 
 Button.propTypes = {

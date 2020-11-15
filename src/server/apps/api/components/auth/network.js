@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 import response from '../../network/response';
 import apiKeyService from './apiKeyService';
-import userService from './userService'
+import userService from './userService';
 
 const router = express.Router();
 dotenv.config();
@@ -13,7 +13,7 @@ dotenv.config();
 require('../../utils/auth/basic');
 
 router.post('/sign-in', async (req, res) => {
-  const { apiKeyToken } = req.body;
+  const apiKeyToken = process.env.ADMIN_API_KEY_TOKEN;
   if (!apiKeyToken) {
     return response.error(req, res, 401, 'Unauthorized');
   }
@@ -47,16 +47,15 @@ router.post('/sign-in', async (req, res) => {
         return res.status(200).json({ token, user: { id, name, email } });
       });
     } catch (error) {
-      return response.error(req, res, error.message, error);
+      return response.error(req, res, 401, error.message, error);
     }
   })(req, res);
 });
 
-
 router.post('/sign-up', async (req, res) => {
   try {
-    const createdUser = await userService.createUser(req.body)
-    response.success(req, res, 201, 'User created correctly', createdUser)
+    const createdUser = await userService.createUser(req.body);
+    response.success(req, res, 201, 'User created correctly', createdUser);
   } catch (error) {
     return response.error(req, res, error.message, error);
   }
