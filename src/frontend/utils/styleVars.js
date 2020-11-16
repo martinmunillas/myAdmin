@@ -20,8 +20,9 @@ export const rounded = {
     xs: '5px',
     s: '10px',
     m: '20px',
-    l: '50px',
-    xl: '100px',
+    l: '40px',
+    xl: '50px',
+    circle: '100%'
 } 
 
 export const padding = {
@@ -29,6 +30,15 @@ export const padding = {
     xs: '10px',
     s: '20px',
     m: '50px',
-    l: '100px',
-    xl: '200px',
+    l: '70px',
+    xl: '100px',
+} 
+
+export const margin = {
+    none: '0px',
+    xs: '10px',
+    s: '20px',
+    m: '50px',
+    l: '70px',
+    xl: '100px',
 } 

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors, padding, rounded } from '../../utils/styleVars';
+import { colors, margin, padding, rounded } from '../../utils/styleVars';
 
 const Box = styled.div`
   border-radius: ${(props) => rounded[props.rounded]};
   padding: ${(props) => padding[props.padding]};
   width: 100%;
+  height: 100%;
 
   ${(props) => {
     if (props.type === 'secondary') {
@@ -16,17 +17,38 @@ const Box = styled.div`
   }}
 
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: ${(props) => {
+    if (props.align[0] === 's') {
+      return 'flex-start';
+    }
+    if (props.align[0] === 'c') {
+      return 'center';
+    }
+    if (props.align[0] === 'e') {
+      return 'flex-end';
+    }
+  }};
+  align-items: ${(props) => {
+    if (props.align[1] === 's') {
+      return 'flex-start';
+    }
+    if (props.align[1] === 'c') {
+      return 'center';
+    }
+    if (props.align[1] === 'e') {
+      return 'flex-end';
+    }
+  }};
   flex-direction: ${(props) => props.direction};
 `;
 
 Box.propTypes = {
   type: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-  color: PropTypes.oneOf(['blue', 'red', 'yellow', 'white', 'black']),
+  color: PropTypes.oneOf(Object.keys(colors)),
   direction: PropTypes.oneOf(['column', 'row']),
-  rounded: PropTypes.oneOf(['none', 'xs', 's', 'm', 'l', 'xl']),
-  padding: PropTypes.oneOf(['none', 'xs', 's', 'm', 'l', 'xl']),
+  rounded: PropTypes.oneOf(Object.keys(rounded)),
+  padding: PropTypes.oneOf(Object.keys(padding)),
+  align: PropTypes.oneOf(['ss', 'sc', 'se', 'cs', 'cc', 'ce', 'es', 'ec', 'ee']),
 };
 
 Box.defaultProps = {
@@ -35,6 +57,7 @@ Box.defaultProps = {
   direction: 'column',
   rounded: 'none',
   padding: 'm',
+  align: 'cc',
 };
 
 export default Box;

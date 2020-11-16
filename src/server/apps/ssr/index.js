@@ -83,7 +83,7 @@ const renderApp = async (req, res) => {
       };
     } catch (error) {
       if (isDev) {
-        console.log(error);
+        console.log('Error:', error.message);
       }
       return {};
     }

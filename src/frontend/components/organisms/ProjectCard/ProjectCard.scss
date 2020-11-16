@@ -1,26 +1,23 @@
 .projectCard {
   width: 100%;
-  margin: 500px 0;
-  height: 350px;
+  margin: 50px 0;
+  height: 400px;
 
   img {
     width: 40%;
-    height: 350px;
+    height: 100%;
     object-fit: cover;
     object-position: 0 0;
-    border-radius: 50px;
+    border-radius: 20px;
   }
 
   &__content {
-    margin-left: 50px ;
-    height: inherit;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
+    margin-left: 50px;
+    width: 60%;
 
     p {
-      font-size: 25px;
+      margin: 10px 0;
+      font-size: 24px;
     }
 
     &__button {
