@@ -9,7 +9,7 @@ const SignIn = () => {
   return (
     <>
       <SpacedLayout>
-        <Box color='white' type='secondary'>
+        <Box color='white' type='secondary' rounded='m'>
           <Title color='yellow'>Sign In!</Title>
           <SignInForm />
         </Box>

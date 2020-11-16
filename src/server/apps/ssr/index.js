@@ -51,7 +51,7 @@ const setResponse = (html, preloadedState, manifest) => {
               <link rel="stylesheet" type="text/css" href="${mainStyles}">
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>martinmunilla.</title>
+              <title>myAdmin</title>
           </head>
           <body>
               <div id="root">${html}</div>
@@ -77,9 +77,18 @@ const renderApp = async (req, res) => {
           'Authorization': `Bearer ${token}`
         }
       });
+
+      const messages = await axios({
+        method: 'GET',
+        url: `${URL}/api/messages`,
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       return {
         user: { name, email, id },
         projects: projects.data.data,
+        messages: messages.data.data
       };
     } catch (error) {
       if (isDev) {

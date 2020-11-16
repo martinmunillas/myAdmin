@@ -5,7 +5,7 @@ import { colors, margin, padding, rounded } from '../../utils/styleVars';
 const Box = styled.div`
   border-radius: ${(props) => rounded[props.rounded]};
   padding: ${(props) => padding[props.padding]};
-  width: 100%;
+  width: ${props => props.width}%;
   height: 100%;
 
   ${(props) => {
@@ -49,6 +49,7 @@ Box.propTypes = {
   rounded: PropTypes.oneOf(Object.keys(rounded)),
   padding: PropTypes.oneOf(Object.keys(padding)),
   align: PropTypes.oneOf(['ss', 'sc', 'se', 'cs', 'cc', 'ce', 'es', 'ec', 'ee']),
+  width: PropTypes.number,
 };
 
 Box.defaultProps = {
@@ -58,6 +59,7 @@ Box.defaultProps = {
   rounded: 'none',
   padding: 'm',
   align: 'cc',
+  width: 100,
 };
 
 export default Box;

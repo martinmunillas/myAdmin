@@ -7,7 +7,7 @@ import ProjectCard from '../components/organisms/ProjectCard/ProjectCard';
 const Projects = ({ projects }) => {
   return (
     <MainLayout>
-      <Title blue>Projects</Title>
+      <Title>Projects</Title>
       <ul>
         {projects.map((project) => (
           <ProjectCard {...project} key={project._id} />

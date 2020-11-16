@@ -14,6 +14,18 @@ export const titleSize = {
     xl: '7rem',
 }
 
+export const textSize = {
+    s: '18px',
+    m: '24px',
+    l: '30px',
+}
+
+export const textWeight = {
+    thin: '200',
+    regular: '400',
+    bold: '700',
+}
+
 
 export const rounded = {
     none: '0px',
