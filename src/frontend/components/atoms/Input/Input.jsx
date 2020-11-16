@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Input.scss'
+import './Input.scss';
 
 const Input = ({ title, type, name, onChange, secondary }) => {
   return (
     <div className='input'>
-      <label>{title}</label>
+      {title ? <label>{title}</label> : null}
       <input
         type={type}
         name={name}
@@ -18,7 +18,7 @@ const Input = ({ title, type, name, onChange, secondary }) => {
 };
 
 Input.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   type: PropTypes.string,
   secondary: PropTypes.bool,
   name: PropTypes.string.isRequired,

@@ -1,6 +1,11 @@
 .messageCard {
   margin: 50px 0;
 
+  &__message {
+    min-height: 150px;
+    margin-top: 10px;
+  }
+
   button {
     width: 100%;
   }

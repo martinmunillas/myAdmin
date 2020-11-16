@@ -85,10 +85,14 @@ const renderApp = async (req, res) => {
           'Authorization': `Bearer ${token}`
         }
       });
+
+      const toDos = [{task: 'Finish Api', date: new Date()}, {task: 'Finish Api', date: new Date()}]
+
       return {
         user: { name, email, id },
         projects: projects.data.data,
-        messages: messages.data.data
+        messages: messages.data.data,
+        toDos,
       };
     } catch (error) {
       if (isDev) {

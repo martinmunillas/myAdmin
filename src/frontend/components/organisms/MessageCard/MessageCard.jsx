@@ -16,14 +16,20 @@ const MessageCard = ({ name, mail, message, date }) => {
       rounded='l'
       padding='m'
       className='messageCard'
+      align='ss'
     >
-      <Box type='tertiary' direction='row' padding='s' align='ss'>
-        <Text color='white' weight='bold'>
-          {name}({mail}) - {format(new Date(date), 'dd/MM/yyyy - hh:mm')}
-        </Text>
-      </Box>
+      <Text color='white' weight='bold'>
+        {name}({mail}) - {format(new Date(date), 'dd/MM/yyyy - hh:mm')}
+      </Text>
       <Box type='tertiary' direction='row' padding='none' align='ss'>
-        <Box type='primary' color='white' align='ss' padding='s' rounded='m'>
+        <Box
+          type='primary'
+          color='white'
+          align='ss'
+          padding='s'
+          rounded='m'
+          className='messageCard__message'
+        >
           <Text color='black'>{message}</Text>
         </Box>
         <Box type='tertiary' direction='column' padding='none' width={40}>
