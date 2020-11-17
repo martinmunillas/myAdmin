@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { login } from '../../../redux/actions';
+import { loginRequest } from '../../../redux/actions';
 
 import Button from '../../atoms/Button/Button';
 import Input from '../../atoms/Input/Input';
@@ -13,7 +13,7 @@ const SignInForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.login(form, '/');
+    props.loginRequest(form, '/');
   };
 
   const handleChange = (e) => {
@@ -38,7 +38,7 @@ const SignInForm = (props) => {
 };
 
 const mapDispatch = {
-  login,
+  loginRequest,
 };
 
 export default connect(null, mapDispatch)(SignInForm);

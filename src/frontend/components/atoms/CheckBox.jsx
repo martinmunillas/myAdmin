@@ -15,11 +15,11 @@ const Styled = styled.input`
   border-radius: 50%;
 
   &:checked {
-    background: ${colors['blue']};
+    background: ${colors['black']};
   }
 `;
 
-const CheckBox = ({ handleChange }) => <Styled type='checkbox' onChange={handleChange} />;
+const CheckBox = ({ onChange }) => <Styled type='checkbox' onChange={onChange} />;
 
 CheckBox.propTypes = {
     handleChange: PropTypes.func

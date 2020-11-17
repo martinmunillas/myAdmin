@@ -74,25 +74,31 @@ const renderApp = async (req, res) => {
         method: 'GET',
         url: `${URL}/api/projects`,
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const messages = await axios({
         method: 'GET',
         url: `${URL}/api/messages`,
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      const toDos = [{task: 'Finish Api', date: new Date()}, {task: 'Finish Api', date: new Date()}]
+      const toDos = await axios({
+        method: 'GET',
+        url: `${URL}/api/toDos`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return {
         user: { name, email, id },
         projects: projects.data.data,
         messages: messages.data.data,
-        toDos,
+        toDos: toDos.data.data,
       };
     } catch (error) {
       if (isDev) {

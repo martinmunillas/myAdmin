@@ -1,13 +1,22 @@
 import React from 'react';
-
-import Input from '../../atoms/Input/Input';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import './IconInput.scss';
 
 const IconInput = (props) => {
   return (
-    <div>
-      <Input type={props.type} name={props.name} placeholder={props.placeholder} />
+    <div className='iconInput'>
+      <input
+        type='text'
+        name={props.name}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        value={props.value || ''}
+      />
+      <button type='submit'>
+        <FontAwesomeIcon icon={faPlusCircle} size='3x' />
+      </button>
     </div>
   );
 };

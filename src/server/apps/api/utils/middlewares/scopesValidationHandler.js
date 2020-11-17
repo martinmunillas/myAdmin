@@ -5,11 +5,11 @@ const scopesValidationHandler = (allowedScopes) => {
     if (!req.user || (req.user && !req.user.scopes)) {
       response.error(req, res, 401, 'Unauthorized', 'Authorization Error');
     }
-
+    
     const hasAcces = allowedScopes
-      .map((allowedScope) => req.user.scopes.includes(allowedScope))
-      .find((item) => Boolean(item));
-
+    .map((allowedScope) => req.user.scopes.includes(allowedScope))
+    .find((item) => Boolean(item));
+    
     if (hasAcces) {
       next();
     } else {
