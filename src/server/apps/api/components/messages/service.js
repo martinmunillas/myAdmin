@@ -5,8 +5,16 @@ const getMessages = async () => {
 };
 
 const sendMessage = async (project) => {
-  const date = new Date()
-  return await new messageSchema({...project, date}).save();
+  const date = new Date();
+  return await new messageSchema({ ...project, date, isRead: false }).save();
+};
+
+const readMessage = async (id) => {
+  return await messageSchema.updateOne({ _id: id }, { isRead: true })
+};
+
+const unreadMessage = async (id) => {
+  return await messageSchema.updateOne({ _id: id }, { isRead: false })
 };
 
 const deleteMessage = async (id) => {
@@ -16,5 +24,7 @@ const deleteMessage = async (id) => {
 export default {
   getMessages,
   sendMessage,
+  readMessage,
+  unreadMessage,
   deleteMessage,
 };

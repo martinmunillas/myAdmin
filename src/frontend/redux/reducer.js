@@ -10,6 +10,34 @@ const reducer = (state, action) => {
         ...state,
         toDos: state.toDos.filter((todo) => todo._id !== action.payload.id),
       };
+
+    case 'READ_MESSAGE':
+      return {
+        ...state,
+        messages: state.messages.map((message) => {
+          if (message._id == action.payload.id) {
+            return { ...message, isRead: true };
+          }
+          return message;
+        }),
+      };
+
+    case 'UNREAD_MESSAGE':
+      return {
+        ...state,
+        messages: state.messages.map((message) => {
+          if (message._id == action.payload.id) {
+            return { ...message, isRead: false };
+          }
+          return message;
+        }),
+      };
+
+    case 'DELETE_MESSAGE':
+      return {
+        ...state,
+        messages: state.messages.filter((message) => message._id !== action.payload.id),
+      };
     case 'SET_STATE':
       return {
         user: state.user,

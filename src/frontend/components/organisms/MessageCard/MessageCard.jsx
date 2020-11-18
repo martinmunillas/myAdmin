@@ -1,13 +1,34 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { connect } from 'react-redux';
+
+import {
+  deleteMessageRequest,
+  readMessageRequest,
+  unreadMessageRequest,
+} from '../../../redux/actions';
 
 import Box from '../../atoms/Box';
-import Button from '../../atoms/Button/Button';
+import Button from '../../atoms/Button';
 import Text from '../../atoms/Text';
 
 import './MessageCard.scss';
 
-const MessageCard = ({ name, mail, message, date }) => {
+const MessageCard = (props) => {
+  const { name, mail, message, date, isRead, _id } = props;
+
+  const handleDelete = (e) => {
+    props.deleteMessageRequest({ id: _id });
+  };
+
+  const handleRead = (e) => {
+    props.readMessageRequest({ id: _id });
+  };
+
+  const handleUnread = (e) => {
+    props.unreadMessageRequest({ id: _id });
+  };
+
   return (
     <Box
       type='primary'
@@ -33,8 +54,21 @@ const MessageCard = ({ name, mail, message, date }) => {
           <Text color='black'>{message}</Text>
         </Box>
         <Box type='tertiary' direction='column' padding='none' width={40}>
-          <Button color='blue'>Mark as seen</Button>
-          <Button color='red'>Delete</Button>
+          
+          {!isRead ? (
+            <Button color='blue' onClick={handleRead}>
+              Mark as read
+            </Button>
+          ) : (
+            <Button color='black' onClick={handleUnread}>
+              Mark as unread
+            </Button>
+          )}
+
+          <Button color='red' onClick={handleDelete}>
+            Delete
+          </Button>
+
           <Button color='black'>Reply ➡</Button>
         </Box>
       </Box>
@@ -42,4 +76,10 @@ const MessageCard = ({ name, mail, message, date }) => {
   );
 };
 
-export default MessageCard;
+const mapDispatch = {
+  deleteMessageRequest,
+  readMessageRequest,
+  unreadMessageRequest,
+};
+
+export default connect(null, mapDispatch)(MessageCard);

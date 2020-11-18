@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { loginRequest } from '../../../redux/actions';
 
-import Button from '../../atoms/Button/Button';
+import Button from '../../atoms/Button';
 import Input from '../../atoms/Input/Input';
 
 import './SignInForm.scss';
@@ -30,9 +30,6 @@ const SignInForm = (props) => {
         <Input type='password' title='Password' name='password' onChange={handleChange} />
         <Button color='blue'>Sign-In</Button>
       </form>
-      <Button level='tertiary' color='white' type='submit'>
-        Ask for permission!
-      </Button>
     </>
   );
 };

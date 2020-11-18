@@ -14,7 +14,7 @@ const IconInput = (props) => {
         onChange={props.onChange}
         value={props.value || ''}
       />
-      <button type='submit'>
+      <button type='submit' className='iconInput__button'>
         <FontAwesomeIcon icon={faPlusCircle} size='3x' />
       </button>
     </div>

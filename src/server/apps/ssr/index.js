@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import dotenv from 'dotenv';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { StyleSheetManager, ServerStyleSheet } from 'styled-components';
+import { dom } from '@fortawesome/fontawesome-svg-core';
 
 import routes from '../../../frontend/routes/routes';
 import reducer from '../../../frontend/redux/reducer';
@@ -41,7 +43,7 @@ if (isDev) {
   );
 }
 
-const setResponse = (html, preloadedState, manifest) => {
+const setResponse = (html, preloadedState, manifest, styles) => {
   const mainStyles = manifest ? manifest['main.css'] : '/build/app.css';
   const mainBuild = manifest ? manifest['main.js'] : '/build/app.js';
 
@@ -52,6 +54,8 @@ const setResponse = (html, preloadedState, manifest) => {
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>myAdmin</title>
+              ${styles}
+              <style>${dom.css()}</style>
           </head>
           <body>
               <div id="root">${html}</div>
@@ -110,19 +114,25 @@ const renderApp = async (req, res) => {
   const initialState = await getInitialState();
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
+  const sheet = new ServerStyleSheet();
   const html = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.url} context={{}}>
-        <Switch>
-          {routes.map((route) => (
-            <Route {...route} key={route.path} />
-          ))}
-        </Switch>
-      </StaticRouter>
+      <StyleSheetManager sheet={sheet.instance}>
+        <StaticRouter location={req.url} context={{}}>
+          <Switch>
+            {routes.map((route) => (
+              <Route {...route} key={route.path} />
+            ))}
+          </Switch>
+        </StaticRouter>
+      </StyleSheetManager>
     </Provider>
   );
 
-  res.send(setResponse(html, preloadedState, req.hashManifest));
+  const styles = sheet.getStyleTags();
+  sheet.seal();
+
+  res.send(setResponse(html, preloadedState, req.hashManifest, styles));
 };
 
 const checkAuth = async (req, res, next) => {

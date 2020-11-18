@@ -5,19 +5,18 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
+import {config} from '@fortawesome/fontawesome-svg-core';
 
 import App from './routes/App';
 import reducer from './redux/reducer';
 
 const history = createBrowserHistory();
 const preloadedState = window.__PRELOADED_STATE__;
-const store = createStore(
-  reducer,
-  preloadedState,
-  compose(applyMiddleware(thunk))
-);
+const store = createStore(reducer, preloadedState, compose(applyMiddleware(thunk)));
 
-import './main.scss'
+config.autoAddCss = false;
+
+import './main.scss';
 
 ReactDOM.hydrate(
   <Provider store={store}>

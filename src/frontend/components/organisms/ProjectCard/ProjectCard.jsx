@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Box from '../../atoms/Box';
-import Button from '../../atoms/Button/Button';
+import Button from '../../atoms/Button';
 import Title from '../../atoms/Title';
 
 import './ProjectCard.scss';
