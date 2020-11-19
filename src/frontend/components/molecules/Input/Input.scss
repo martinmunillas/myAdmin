@@ -1,0 +1,28 @@
+@import '../../../Vars.scss';
+
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 15px 0;
+
+  label {
+    font-size: 24px;
+  }
+
+  input {
+    margin-top: 10px;
+    padding: 20px 30px;
+    border-radius: 50px;
+    color: $blackColor;
+    width: 100%;
+  }
+  textarea {
+    margin-top: 10px;
+    padding: 20px 30px;
+    border-radius: 30px 30px 0 30px;
+    color: $blackColor;
+    width: 100%;
+    min-height: 150px;
+  }
+}

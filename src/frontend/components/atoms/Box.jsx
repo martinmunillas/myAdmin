@@ -5,12 +5,13 @@ import { colors, margin, padding, rounded } from '../../utils/styleVars';
 const Box = styled.div`
   border-radius: ${(props) => rounded[props.rounded]};
   padding: ${(props) => padding[props.padding]};
-  width: ${props => props.width}%;
+  width: ${(props) => props.width}%;
   height: 100%;
+  margin-top: ${(props) => props.marginTop}px;
 
   ${(props) => {
     if (props.type === 'secondary') {
-      return `border: 1px solid ${colors[props.color]};`;
+      return `border: 8px solid ${colors[props.color]};`;
     } else if (props.type === 'primary') {
       return `background: ${colors[props.color]};`;
     }
@@ -42,6 +43,12 @@ const Box = styled.div`
   flex-direction: ${(props) => props.direction};
 `;
 
+const numberStringValidator = (props, propName, componentName) =>
+  /[^\d]+/.test(props[propName]) &&
+  new Error(
+    'Invalid prop `' + propName + '` supplied to' + ' `' + componentName + '`. Validation failed.'
+  );
+
 Box.propTypes = {
   type: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
   color: PropTypes.oneOf(Object.keys(colors)),
@@ -49,7 +56,8 @@ Box.propTypes = {
   rounded: PropTypes.oneOf(Object.keys(rounded)),
   padding: PropTypes.oneOf(Object.keys(padding)),
   align: PropTypes.oneOf(['ss', 'sc', 'se', 'cs', 'cc', 'ce', 'es', 'ec', 'ee']),
-  width: PropTypes.number,
+  width: numberStringValidator,
+  marginTop: numberStringValidator,
 };
 
 Box.defaultProps = {

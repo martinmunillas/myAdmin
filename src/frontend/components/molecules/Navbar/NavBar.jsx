@@ -15,7 +15,10 @@ const NavBar = (props) => {
 
   const getClasses = ({ path, color }) => {
     let className = 'navBar__item';
-    if (props.location.pathname === path) {
+    if (
+      props.location.pathname === path ||
+      (props.location.pathname.startsWith(path) && path.length - 1)
+    ) {
       className += ` ${color}Background`;
     }
     return className;

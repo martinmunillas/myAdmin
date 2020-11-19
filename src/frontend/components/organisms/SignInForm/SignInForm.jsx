@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { loginRequest } from '../../../redux/actions';
 
 import Button from '../../atoms/Button';
-import Input from '../../atoms/Input/Input';
+import Input from '../../molecules/Input/Input';
 
 import './SignInForm.scss';
 
@@ -27,7 +27,7 @@ const SignInForm = (props) => {
     <>
       <form className='signInForm' onSubmit={handleSubmit}>
         <Input title='Email' name='email' onChange={handleChange} />
-        <Input type='password' title='Password' name='password' onChange={handleChange} />
+        <Input inputType='password' title='Password' name='password' onChange={handleChange} />
         <Button color='blue'>Sign-In</Button>
       </form>
     </>
