@@ -1,7 +1,7 @@
 import projectSchema from './schema';
 
 const getProjects = async () => {
-  return await projectSchema.find();
+  return await (await projectSchema.find()).reverse();
 };
 
 const addProject = async (project) => {

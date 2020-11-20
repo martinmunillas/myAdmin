@@ -1,7 +1,7 @@
 import messageSchema from './schema';
 
 const getMessages = async () => {
-  return await messageSchema.find();
+  return await (await messageSchema.find()).reverse();
 };
 
 const sendMessage = async (project) => {
@@ -10,11 +10,11 @@ const sendMessage = async (project) => {
 };
 
 const readMessage = async (id) => {
-  return await messageSchema.updateOne({ _id: id }, { isRead: true })
+  return await messageSchema.updateOne({ _id: id }, { isRead: true });
 };
 
 const unreadMessage = async (id) => {
-  return await messageSchema.updateOne({ _id: id }, { isRead: false })
+  return await messageSchema.updateOne({ _id: id }, { isRead: false });
 };
 
 const deleteMessage = async (id) => {

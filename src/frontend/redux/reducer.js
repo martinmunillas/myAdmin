@@ -1,5 +1,16 @@
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'CREATE_PROJECT':
+      return {
+        ...state,
+        projects: [action.payload, ...state.projects],
+      };
+
+    case 'DELETE_PROJECT':
+      return {
+        ...state,
+        projects: state.projects.filter((project) => action.payload.id !== project._id),
+      };
     case 'CREATE_TODO':
       return {
         ...state,

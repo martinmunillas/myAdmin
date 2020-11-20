@@ -50,7 +50,7 @@ export const margin = {
     none: '0px',
     xs: '10px',
     s: '20px',
-    m: '50px',
-    l: '70px',
+    m: '40px',
+    l: '60px',
     xl: '100px',
 } 

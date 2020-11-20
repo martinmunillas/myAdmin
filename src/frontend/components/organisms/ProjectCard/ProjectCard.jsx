@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Box from '../../atoms/Box';
 import Button from '../../atoms/Button';
@@ -6,7 +7,7 @@ import Title from '../../atoms/Title';
 
 import './ProjectCard.scss';
 
-const ProjectCard = ({ name, description, mainImage }) => {
+const ProjectCard = ({ name, description, mainImage, _id }) => {
   return (
     <div className='projectCard'>
       <Box type='primary' color='red' direction='row' rounded='l' padding='m' margin='none'>
@@ -18,9 +19,12 @@ const ProjectCard = ({ name, description, mainImage }) => {
             <p>{description.length > 420 ? description.substring(0, 420) + '...' : description}</p>
           </Box>
 
-          <Button color='black' className='projectCard__content--button'>
-            See project ➡
-          </Button>
+          <Link to={`/projects/${_id}`}>
+            <Button color='black' className='projectCard__content--button'>
+              See project ➡
+            </Button>
+          </Link>
+          
         </Box>
       </Box>
     </div>

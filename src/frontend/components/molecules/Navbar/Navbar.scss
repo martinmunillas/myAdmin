@@ -12,13 +12,30 @@
   border-radius: 0 10px 10px 0;
 
   &__item {
-      font-size: 1.3rem;
-      padding: 10px;
-      margin: 5px;
-      border-radius: 10px;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 10px;
 
-      &--active {
-          background-color: #222222;
+    &--child {
+      background-color: #222222;
+      display: none;
+      flex-direction: column;
+      list-style: none;
+      width: 100%;
+      border-radius: 0 0 10px 10px;
+      font-size: 22px;
+      align-self: center;
+      padding: 10px;
+      transform: translate(0,-5px);
+      z-index: -1;
+
+      &Active {
+        display: flex;
       }
+
+      li {
+        margin-top: 10px;
+      }
+    }
   }
 }

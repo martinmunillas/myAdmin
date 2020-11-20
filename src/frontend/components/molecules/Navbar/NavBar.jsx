@@ -24,6 +24,17 @@ const NavBar = (props) => {
     return className;
   };
 
+  const getChildClasses = ({ path }) => {
+    let className = 'navBar__item--child';
+    if (
+      props.location.pathname === path ||
+      (props.location.pathname.startsWith(path) && path.length - 1)
+    ) {
+      className += ` navBar__item--childActive`;
+    }
+    return className;
+  };
+
   return (
     <nav className='navBar'>
       <Link className={getClasses(src.home)} to={src.home.path}>
@@ -32,6 +43,14 @@ const NavBar = (props) => {
       <Link className={getClasses(src.projects)} to={src.projects.path}>
         Projects
       </Link>
+      <ul className={getChildClasses(src.projects)}>
+        <li>
+          <Link to='/projects'>All Projects</Link>
+        </li>
+        <li>
+          <Link to='/projects/create'>Create Project</Link>
+        </li>
+      </ul>
       <Link className={getClasses(src.messages)} to={src.messages.path}>
         Messages
       </Link>

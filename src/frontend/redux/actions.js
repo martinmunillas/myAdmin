@@ -12,6 +12,16 @@ const request = async (url, method = 'get', payload = {}) => {
   });
 };
 
+export const createProject = (payload) => ({
+  type: 'CREATE_PROJECT',
+  payload,
+});
+
+export const deleteProject = (payload) => ({
+  type: 'DELETE_PROJECT',
+  payload,
+});
+
 export const createToDo = (payload) => ({
   type: 'CREATE_TODO',
   payload,
@@ -88,6 +98,33 @@ export const unreadMessageRequest = (payload) => {
       await request(`/api/messages/${payload.id}/unread`, 'put');
       dispatch(unreadMessage(payload));
     } catch (error) {}
+  };
+};
+
+export const createProjectRequest = (payload) => {
+  return async (dispatch) => {
+    try {
+      await request('/api/projects', 'post', payload);
+
+      dispatch(createProject(payload));
+      dispatch(getState());
+    } catch (error) {
+      console.log(error);
+      // dispatch(setError(error))
+    }
+  };
+};
+
+export const deleteProjectRequest = (payload) => {
+  return async (dispatch) => {
+    try {
+      await request(`/api/projects/${payload.id}`, 'delete');
+
+      dispatch(deleteProject(payload));
+    } catch (error) {
+      console.log(error);
+      // dispatch(setError(error))
+    }
   };
 };
 
