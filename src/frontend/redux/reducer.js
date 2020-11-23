@@ -5,7 +5,11 @@ const reducer = (state, action) => {
         ...state,
         projects: [action.payload, ...state.projects],
       };
-
+    case 'EDIT_PROJECT':
+      return {
+        ...state,
+        projects: state.projects.map(project => project._id == action.payload._id ? action.payload : project),
+      };
     case 'DELETE_PROJECT':
       return {
         ...state,

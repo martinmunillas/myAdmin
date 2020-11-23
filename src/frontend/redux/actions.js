@@ -17,6 +17,11 @@ export const createProject = (payload) => ({
   payload,
 });
 
+export const editProject = (payload) => ({
+  type: 'EDIT_PROJECT',
+  payload,
+});
+
 export const deleteProject = (payload) => ({
   type: 'DELETE_PROJECT',
   payload,
@@ -108,6 +113,19 @@ export const createProjectRequest = (payload) => {
 
       dispatch(createProject(payload));
       dispatch(getState());
+    } catch (error) {
+      console.log(error);
+      // dispatch(setError(error))
+    }
+  };
+};
+
+export const editProjectRequest = (payload, id) => {
+  return async (dispatch) => {
+    try {
+      await request(`/api/projects/${id}`, 'put', payload);
+
+      dispatch(editProject(payload));
     } catch (error) {
       console.log(error);
       // dispatch(setError(error))

@@ -5,6 +5,7 @@ import CreateProject from '../pages/CreateProject';
 import Messages from '../pages/Messages';
 import ToDo from '../pages/ToDo';
 import ProjectDetail from '../pages/ProjectDetail';
+import EditProject from '../pages/EditProject';
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     exact: true,
     path: '/projects/create',
     component: CreateProject,
+  },
+  {
+    exact: true,
+    path: '/projects/:id/edit',
+    component: EditProject,
   },
   {
     exact: true,

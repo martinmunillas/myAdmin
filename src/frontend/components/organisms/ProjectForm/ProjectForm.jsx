@@ -41,14 +41,14 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           name='images'
           onChange={handleArrayChange}
           type='textarea'
-          value={formValues.images}
+          value={formValues.images.join(', ')}
         />
         <Input
           title='Repositories (URLs, comma separated)'
           name='repos'
           onChange={handleArrayChange}
           type='textarea'
-          value={formValues.repos}
+          value={formValues.repos.join(', ')}
         />
         <Input title='Demo (URL)' name='demo' onChange={handleChange} value={formValues.demo} />
         <Button color='red' type='submit'>

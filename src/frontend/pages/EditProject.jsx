@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 
-import { createProjectRequest } from '../redux/actions';
+import { editProjectRequest } from '../redux/actions';
 
 import Box from '../components/atoms/Box';
 import Title from '../components/atoms/Title';
 import MainLayout from '../components/layouts/MainLayout/MainLayout';
-import CreateProjectForm from '../components/organisms/ProjectForm/ProjectForm';
+import ProjectForm from '../components/organisms/ProjectForm/ProjectForm';
 import { connect } from 'react-redux';
 
-const CreateProject = (props) => {
-  const [form, setForm] = useState({});
+const EditProject = (props) => {
+  const project = props.projects.find((project) => project._id == props.match.params.id);
+
+  const [form, setForm] = useState(project);
   const handleChange = (e) => {
     setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+        ...form,
+        [e.target.name]: e.target.value,
     });
   };
 
@@ -26,11 +28,11 @@ const CreateProject = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.createProjectRequest(form);
+    props.editProjectRequest(form, project._id);
   };
   return (
     <MainLayout>
-      <Title>Create new project</Title>
+      <Title>Edit {project.name}</Title>
 
       <Box
         color='red'
@@ -41,7 +43,7 @@ const CreateProject = (props) => {
         rounded='xl'
         marginTop='40'
       >
-        <CreateProjectForm
+        <ProjectForm
           eventHandlers={{ handleArrayChange, handleChange, handleSubmit }}
           formValues={form}
         />
@@ -51,7 +53,11 @@ const CreateProject = (props) => {
 };
 
 const mapDispatch = {
-  createProjectRequest,
+  editProjectRequest,
 };
 
-export default connect(null, mapDispatch)(CreateProject);
+const mapState = (state) => ({
+  projects: state.projects,
+});
+
+export default connect(mapState, mapDispatch)(EditProject);
