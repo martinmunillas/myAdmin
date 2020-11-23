@@ -13,13 +13,15 @@ import { dom } from '@fortawesome/fontawesome-svg-core';
 import routes from '../../../frontend/routes/routes';
 import reducer from '../../../frontend/redux/reducer';
 
+import getManifest from './middlewares/getManifest';
+
 dotenv.config();
 const router = express.Router();
 
 const { ENV, URL, AUTH_JWT } = process.env;
 const isDev = ENV === 'development';
 
-router.use(express.static(__dirname + '/public'))
+router.use(express.static(__dirname + '/public'));
 if (isDev) {
   const webpack = require('webpack');
   const webpackConfig = require('../../../../webpack.config.js');
@@ -42,12 +44,13 @@ if (isDev) {
       log: console.log,
     })
   );
+} else {
+  router.use(getManifest);
 }
 
-
 const setResponse = (html, preloadedState, manifest, styles) => {
-  const mainStyles = manifest ? manifest['main.css'] : '/app.css';
-  const mainBuild = manifest ? manifest['main.js'] : '/app.js';
+  const mainStyles = manifest ? `/build${manifest['main.css']}` : '/app.css';
+  const mainBuild = manifest ? `/build${manifest['main.js']}` : '/app.js';
 
   return `<!DOCTYPE html>
           <html lang="en">
