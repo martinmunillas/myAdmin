@@ -20,8 +20,8 @@ module.exports = {
   entry,
   mode: ENV,
   output: {
-    path: path.resolve(__dirname, 'src/server/apps/ssr/public'),
-    filename: isDev ? 'build/app.js' : 'build/app-[hash].js',
+    path: path.resolve(__dirname, 'src/server/apps/ssr/public/build'),
+    filename: isDev ? 'app.js' : 'app-[hash].js',
     publicPath: '/',
   },
   resolve: {
@@ -60,12 +60,10 @@ module.exports = {
 
     !isDev ? new ManifestPlugin() : () => {},
 
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public/build'),
-    }),
+    new CleanWebpackPlugin(),
 
     new MiniCssExtractPlugin({
-      filename: isDev ? 'build/app.css' : 'build/app-[hash].css',
+      filename: isDev ? 'app.css' : 'app-[hash].css',
     }),
   ],
   optimization: {

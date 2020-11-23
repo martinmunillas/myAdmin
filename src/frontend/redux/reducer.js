@@ -1,5 +1,25 @@
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'SET_ERROR':
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case 'UNSET_ERROR':
+      return {
+        ...state,
+        error: null,
+      };
+    case 'UNSET_LOADING':
+      return {
+        ...state,
+        loading: false,
+      };
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: true,
+      };
     case 'CREATE_PROJECT':
       return {
         ...state,
@@ -8,7 +28,9 @@ const reducer = (state, action) => {
     case 'EDIT_PROJECT':
       return {
         ...state,
-        projects: state.projects.map(project => project._id == action.payload._id ? action.payload : project),
+        projects: state.projects.map((project) =>
+          project._id == action.payload._id ? action.payload : project
+        ),
       };
     case 'DELETE_PROJECT':
       return {

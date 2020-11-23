@@ -19,6 +19,7 @@ const router = express.Router();
 const { ENV, URL, AUTH_JWT } = process.env;
 const isDev = ENV === 'development';
 
+router.use(express.static(__dirname + '/public'))
 if (isDev) {
   const webpack = require('webpack');
   const webpackConfig = require('../../../../webpack.config.js');
@@ -43,9 +44,10 @@ if (isDev) {
   );
 }
 
+
 const setResponse = (html, preloadedState, manifest, styles) => {
-  const mainStyles = manifest ? manifest['main.css'] : '/build/app.css';
-  const mainBuild = manifest ? manifest['main.js'] : '/build/app.js';
+  const mainStyles = manifest ? manifest['main.css'] : '/app.css';
+  const mainBuild = manifest ? manifest['main.js'] : '/app.js';
 
   return `<!DOCTYPE html>
           <html lang="en">
@@ -59,6 +61,8 @@ const setResponse = (html, preloadedState, manifest, styles) => {
           </head>
           <body>
               <div id="root">${html}</div>
+              <div id="errors"></div>
+              <div id="loading"></div>
               <script>
               window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
                 /</g,

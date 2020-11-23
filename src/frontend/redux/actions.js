@@ -12,6 +12,26 @@ const request = async (url, method = 'get', payload = {}) => {
   });
 };
 
+export const setError = (payload) => ({
+  type: 'SET_ERROR',
+  payload,
+});
+
+export const unsetError = (payload) => ({
+  type: 'UNSET_ERROR',
+  payload,
+});
+
+export const setLoading = (payload) => ({
+  type: 'SET_LOADING',
+  payload,
+});
+
+export const unsetLoading = (payload) => ({
+  type: 'UNSET_LOADING',
+  payload,
+});
+
 export const createProject = (payload) => ({
   type: 'CREATE_PROJECT',
   payload,
@@ -60,6 +80,7 @@ export const unreadMessage = (payload) => ({
 export const getState = () => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading());
       const projects = await request(`/api/projects`);
 
       const messages = await request(`/api/messages`);
@@ -74,7 +95,9 @@ export const getState = () => {
 
       dispatch(setState(state));
     } catch (error) {
-      console.log('Error:', error.message);
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
+    } finally {
+      dispatch(unsetLoading());
     }
   };
 };
@@ -84,7 +107,9 @@ export const deleteMessageRequest = (payload) => {
     try {
       await request(`/api/messages/${payload.id}`, 'delete');
       dispatch(deleteMessage({ id: payload.id }));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
+    }
   };
 };
 
@@ -93,7 +118,9 @@ export const readMessageRequest = (payload) => {
     try {
       await request(`/api/messages/${payload.id}/read`, 'put');
       dispatch(readMessage(payload));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
+    }
   };
 };
 
@@ -102,7 +129,9 @@ export const unreadMessageRequest = (payload) => {
     try {
       await request(`/api/messages/${payload.id}/unread`, 'put');
       dispatch(unreadMessage(payload));
-    } catch (error) {}
+    } catch (error) {
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
+    }
   };
 };
 
@@ -115,7 +144,7 @@ export const createProjectRequest = (payload) => {
       dispatch(getState());
     } catch (error) {
       console.log(error);
-      // dispatch(setError(error))
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
     }
   };
 };
@@ -127,8 +156,7 @@ export const editProjectRequest = (payload, id) => {
 
       dispatch(editProject(payload));
     } catch (error) {
-      console.log(error);
-      // dispatch(setError(error))
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
     }
   };
 };
@@ -140,8 +168,7 @@ export const deleteProjectRequest = (payload) => {
 
       dispatch(deleteProject(payload));
     } catch (error) {
-      console.log(error);
-      // dispatch(setError(error))
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
     }
   };
 };
@@ -154,8 +181,7 @@ export const createToDoRequest = (payload) => {
       dispatch(createToDo(payload));
       dispatch(getState());
     } catch (error) {
-      console.log(error);
-      // dispatch(setError(error))
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
     }
   };
 };
@@ -167,8 +193,7 @@ export const completeToDoRequest = (payload) => {
 
       dispatch(completeToDo({ id: payload._id }));
     } catch (error) {
-      console.log(error);
-      // dispatch(setError(error))
+      dispatch(setError({ message: error.message, status: error.status || 500 }));
     }
   };
 };
@@ -176,6 +201,7 @@ export const completeToDoRequest = (payload) => {
 export const loginRequest = ({ email, password }, redirectUrl) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading());
       const petition = await axios({
         method: 'POST',
         url: '/api/auth/sign-in',
@@ -193,7 +219,9 @@ export const loginRequest = ({ email, password }, redirectUrl) => {
       window.location.href = redirectUrl;
     } catch (error) {
       console.log(error);
-      // dispatch(setError(error))
+      dispatch(setError({ message: error.message, status: error.status || 401 }));
+    } finally {
+      dispatch(unsetLoading());
     }
   };
 };
