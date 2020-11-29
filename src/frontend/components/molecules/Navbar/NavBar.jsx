@@ -19,7 +19,7 @@ const NavBar = (props) => {
       props.location.pathname === path ||
       (props.location.pathname.startsWith(path) && path.length - 1)
     ) {
-      className += ` ${color}Background`;
+      className += ` ${color}Background ${color == 'white' && 'black'}`;
     }
     return className;
   };
@@ -54,6 +54,17 @@ const NavBar = (props) => {
       <Link className={getClasses(src.messages)} to={src.messages.path}>
         Messages
       </Link>
+      <ul className={getChildClasses(src.messages)}>
+        <li>
+          <Link to='/messages'>Unread messages</Link>
+        </li>
+        <li>
+          <Link to='/messages/read'>Read messages</Link>
+        </li>
+        <li>
+          <Link to='/messages/all'>All messages</Link>
+        </li>
+      </ul>
       <Link className={getClasses(src.ideas)} to={src.ideas.path}>
         Ideas
       </Link>

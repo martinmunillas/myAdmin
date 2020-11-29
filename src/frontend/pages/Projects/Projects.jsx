@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Title from '../components/atoms/Title';
-import MainLayout from '../components/layouts/MainLayout/MainLayout';
-import ProjectCard from '../components/organisms/ProjectCard/ProjectCard';
-import Box from '../components/atoms/Box';
-import Button from '../components/atoms/Button';
+import Title from '../../components/atoms/Title';
+import MainLayout from '../../components/layouts/MainLayout/MainLayout';
+import ProjectCard from '../../components/organisms/ProjectCard/ProjectCard';
+import Box from '../../components/atoms/Box';
+import Button from '../../components/atoms/Button';
 
 const Projects = ({ projects }) => {
   return (

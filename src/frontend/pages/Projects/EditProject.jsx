@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-
-import { editProjectRequest } from '../redux/actions';
-
-import Box from '../components/atoms/Box';
-import Title from '../components/atoms/Title';
-import MainLayout from '../components/layouts/MainLayout/MainLayout';
-import ProjectForm from '../components/organisms/ProjectForm/ProjectForm';
 import { connect } from 'react-redux';
+
+import { editProjectRequest } from '../../redux/actions';
+
+import Box from '../../components/atoms/Box';
+import Title from '../../components/atoms/Title';
+import MainLayout from '../../components/layouts/MainLayout/MainLayout';
+import ProjectForm from '../../components/organisms/ProjectForm/ProjectForm';
 
 const EditProject = (props) => {
   const project = props.projects.find((project) => project._id == props.match.params.id);
@@ -14,8 +14,8 @@ const EditProject = (props) => {
   const [form, setForm] = useState(project);
   const handleChange = (e) => {
     setForm({
-        ...form,
-        [e.target.name]: e.target.value,
+      ...form,
+      [e.target.name]: e.target.value,
     });
   };
 

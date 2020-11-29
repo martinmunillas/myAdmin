@@ -1,11 +1,16 @@
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
-import Projects from '../pages/Projects';
-import CreateProject from '../pages/CreateProject';
-import Messages from '../pages/Messages';
+import Projects from '../pages/Projects/Projects';
+import CreateProject from '../pages/Projects/CreateProject';
+import UnreadMessages from '../pages/Messages/UnreadMessages';
+import AllMessages from '../pages/Messages/AllMessages';
+import ReadMessages from '../pages/Messages/ReadMessages';
 import ToDo from '../pages/ToDo';
-import ProjectDetail from '../pages/ProjectDetail';
-import EditProject from '../pages/EditProject';
+import ProjectDetail from '../pages/Projects/ProjectDetail';
+import EditProject from '../pages/Projects/EditProject';
+import Settings from '../pages/Settings';
+import Ideas from '../pages/Ideas';
+import NotFound from '../pages/NotFound';
 
 const routes = [
   {
@@ -36,7 +41,17 @@ const routes = [
   {
     exact: true,
     path: '/messages',
-    component: Messages,
+    component: UnreadMessages,
+  },
+  {
+    exact: true,
+    path: '/messages/read',
+    component: ReadMessages,
+  },
+  {
+    exact: true,
+    path: '/messages/all',
+    component: AllMessages,
   },
   {
     exact: true,
@@ -45,8 +60,21 @@ const routes = [
   },
   {
     exact: true,
+    path: '/settings',
+    component: Settings,
+  },
+  {
+    exact: true,
+    path: '/ideas',
+    component: Ideas,
+  },
+  {
+    exact: true,
     path: '/sign-in',
     component: SignIn,
+  },
+  {
+    component: NotFound,
   },
 ];
 

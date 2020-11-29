@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { deleteProjectRequest } from '../redux/actions';
+import { deleteProjectRequest } from '../../redux/actions';
 
-import MainLayout from '../components/layouts/MainLayout/MainLayout';
-import Title from '../components/atoms/Title';
-import Text from '../components/atoms/Text';
-import RoundedImage from '../components/atoms/RoundedImage';
-import Spacer from '../components/atoms/Spacer';
-import DoubleCell from '../components/molecules/DoubleCell/DoubleCell';
-import Button from '../components/atoms/Button';
+import MainLayout from '../../components/layouts/MainLayout/MainLayout';
+import Title from '../../components/atoms/Title';
+import Text from '../../components/atoms/Text';
+import RoundedImage from '../../components/atoms/RoundedImage';
+import Spacer from '../../components/atoms/Spacer';
+import DoubleCell from '../../components/molecules/DoubleCell/DoubleCell';
+import Button from '../../components/atoms/Button';
 
 const ProjectDetail = (props) => {
   const project = props.projects.find((project) => project._id === props.match.params.id);

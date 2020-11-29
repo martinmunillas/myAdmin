@@ -11,6 +11,7 @@ import {
 import Box from '../../atoms/Box';
 import Button from '../../atoms/Button';
 import Text from '../../atoms/Text';
+import Spacer from '../../atoms/Spacer';
 
 import './MessageCard.scss';
 
@@ -53,23 +54,26 @@ const MessageCard = (props) => {
         >
           <Text color='black'>{message}</Text>
         </Box>
-        <Box type='tertiary' direction='column' padding='none' width={40}>
-          
-          {!isRead ? (
-            <Button color='blue' onClick={handleRead}>
-              Mark as read
-            </Button>
-          ) : (
-            <Button color='black' onClick={handleUnread}>
-              Mark as unread
-            </Button>
-          )}
 
-          <Button color='red' onClick={handleDelete}>
-            Delete
-          </Button>
+        <Box type='tertiary' direction='row' padding='none' width={40}>
+          <Spacer direction='row' />
+          <Box type='tertiary' direction='column' padding='none'>
+            {!isRead ? (
+              <Button color='blue' onClick={handleRead}>
+                Mark as read
+              </Button>
+            ) : (
+              <Button color='black' onClick={handleUnread}>
+                Mark as unread
+              </Button>
+            )}
 
-          <Button color='black'>Reply ➡</Button>
+            <Button color='red' onClick={handleDelete}>
+              Delete
+            </Button>
+
+            <Button color='black'>Reply ➡</Button>
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -33,10 +33,7 @@ if (isDev) {
       noInfo: true,
       publicPath: webpackConfig.output.publicPath,
       stats: { colors: true },
-      watchOptions: {
-        aggregateTimeout: 300,
-        poll: true,
-      },
+      watchOptions: {},
     })
   );
   router.use(

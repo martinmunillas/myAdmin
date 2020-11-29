@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import { createProjectRequest } from '../redux/actions';
+import { createProjectRequest } from '../../redux/actions';
 
-import Box from '../components/atoms/Box';
-import Title from '../components/atoms/Title';
-import MainLayout from '../components/layouts/MainLayout/MainLayout';
-import CreateProjectForm from '../components/organisms/ProjectForm/ProjectForm';
+import Box from '../../components/atoms/Box';
+import Title from '../../components/atoms/Title';
+import MainLayout from '../../components/layouts/MainLayout/MainLayout';
+import CreateProjectForm from '../../components/organisms/ProjectForm/ProjectForm';
 import { connect } from 'react-redux';
 
 const CreateProject = (props) => {
