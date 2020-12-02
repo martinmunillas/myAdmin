@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../../molecules/Navbar/NavBar';
 
-import './mainLayout.scss'
+import './MainLayout.scss'
 
 const MainLayout = ({ children }) => {
   return (
