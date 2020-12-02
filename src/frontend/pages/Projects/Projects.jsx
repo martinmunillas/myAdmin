@@ -7,12 +7,14 @@ import MainLayout from '../../components/layouts/MainLayout/MainLayout';
 import ProjectCard from '../../components/organisms/ProjectCard/ProjectCard';
 import Box from '../../components/atoms/Box';
 import Button from '../../components/atoms/Button';
+import Spacer from '../../components/atoms/Spacer';
 
 const Projects = ({ projects }) => {
   return (
     <MainLayout>
       <Box direction='row' padding='none' type='tertiary' align='ss'>
         <Title>Projects</Title>
+        <Spacer direction='row' size='s' />
         <Link to='/projects/create'>
           <Button color='red'>Create new project ➡</Button>
         </Link>

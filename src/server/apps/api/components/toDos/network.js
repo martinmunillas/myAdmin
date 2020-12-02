@@ -12,7 +12,7 @@ require('../../utils/auth/jwt')
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['read:toDos']),
+  scopesValidationHandler(['toDos']),
   async (req, res) => {
     try {
       const toDos = await service.getToDos();
@@ -26,7 +26,7 @@ router.get(
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['create:toDos']),
+  scopesValidationHandler(['toDos']),
   async (req, res) => {
     try {
       const toDo = await service.saveToDo(req.body);
@@ -40,7 +40,7 @@ router.post(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['delete:toDos']),
+  scopesValidationHandler(['toDos']),
   async (req, res) => {
     try {
       const toDo = await service.deleteToDo(req.params.id);

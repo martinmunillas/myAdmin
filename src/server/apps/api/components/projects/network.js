@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 router.post(
   '/',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['create:projects']),
+  scopesValidationHandler(['projects']),
   async (req, res) => {
     try {
       const projects = await service.addProject(req.body);
@@ -35,7 +35,7 @@ router.post(
 router.put(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['update:projects']),
+  scopesValidationHandler(['projects']),
   async (req, res) => {
     try {
       const projects = await service.updateProject(req.params.id, req.body);
@@ -49,7 +49,7 @@ router.put(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['delete:projects']),
+  scopesValidationHandler(['projects']),
   async (req, res) => {
     try {
       const projects = await service.deleteProject(req.params.id);

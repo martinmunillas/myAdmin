@@ -1,7 +1,7 @@
 import express from 'express';
-import passport from 'passport'
+import passport from 'passport';
 
-import scopesValidationHandler from '../../utils/middlewares/scopesValidationHandler'
+import scopesValidationHandler from '../../utils/middlewares/scopesValidationHandler';
 import response from '../../network/response';
 import service from './service';
 
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
 router.put(
   '/:id/read',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['update:projects']),
+  scopesValidationHandler(['projects']),
   async (req, res) => {
     try {
       const projects = await service.readMessage(req.params.id);
@@ -45,23 +45,23 @@ router.put(
 );
 
 router.put(
-    '/:id/unread',
-    passport.authenticate('jwt', { session: false }),
-    scopesValidationHandler(['update:projects']),
-    async (req, res) => {
-      try {
-        const projects = await service.unreadMessage(req.params.id);
-        response.success(req, res, 200, 'Message read', projects);
-      } catch (error) {
-        response.error(req, res, 500, error.message, error);
-      }
+  '/:id/unread',
+  passport.authenticate('jwt', { session: false }),
+  scopesValidationHandler(['projects']),
+  async (req, res) => {
+    try {
+      const projects = await service.unreadMessage(req.params.id);
+      response.success(req, res, 200, 'Message read', projects);
+    } catch (error) {
+      response.error(req, res, 500, error.message, error);
     }
-  );
+  }
+);
 
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
-  scopesValidationHandler(['delete:projects']),
+  scopesValidationHandler(['projects']),
   async (req, res) => {
     try {
       const projects = await service.deleteMessage(req.params.id);
