@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../molecules/Navbar/NavBar';
+import NavBar from '../../molecules/NavBar/NavBar';
 
 import './MainLayout.scss'
 

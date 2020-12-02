@@ -13,11 +13,6 @@ dotenv.config();
 require('../../utils/auth/basic');
 
 router.post('/sign-in', async (req, res) => {
-  const apiKeyToken = process.env.ADMIN_API_KEY_TOKEN;
-  if (!apiKeyToken) {
-    return response.error(req, res, 401, 'Unauthorized');
-  }
-
   passport.authenticate('basic', async (error, user) => {
     try {
       if (error || !user) {
@@ -29,7 +24,6 @@ router.post('/sign-in', async (req, res) => {
           return response.error(req, res, error.message, error);
         }
 
-        const apiKey = await apiKeyService.getApiKey(apiKeyToken);
 
         const { _id: id, name, email } = user;
 
@@ -37,7 +31,6 @@ router.post('/sign-in', async (req, res) => {
           sub: id,
           name,
           email,
-          scopes: apiKey.scopes,
         };
 
         const token = jwt.sign(payload, process.env.AUTH_JWT, {
