@@ -50,7 +50,13 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           type='textarea'
           value={formValues.repos ? formValues.repos.join(', ') : formValues.images}
         />
-        <Input title='Demo (URL)' name='demo' onChange={handleChange} value={formValues.demo} />
+        <Input
+          title='Demo (URLs, comma separated)'
+          type='textarea'
+          name='demos'
+          onChange={handleArrayChange}
+          value={formValues.demos}
+        />
         <Button color='red' type='submit'>
           Create
         </Button>
