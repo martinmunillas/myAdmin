@@ -16,7 +16,7 @@ const ProjectCard = ({ name, description, mainImage, _id }) => {
         <Box type='tertiary' align='se' padding='none' className='projectCard__content'>
           <Box type='tertiary' direction='column' align='ss' padding='none'>
             <Title>{name}</Title>
-            <p>{description.length > 420 ? description.substring(0, 420) + '...' : description}</p>
+            <p>{description.length > 215 ? description.substring(0, 215) + '...' : description}</p>
           </Box>
 
           <Link to={`/projects/${_id}`}>

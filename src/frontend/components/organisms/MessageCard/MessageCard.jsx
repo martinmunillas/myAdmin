@@ -16,7 +16,7 @@ import Spacer from '../../atoms/Spacer';
 import './MessageCard.scss';
 
 const MessageCard = (props) => {
-  const { name, mail, message, date, isRead, _id } = props;
+  const { name, email, message, date, isRead, _id } = props;
 
   const handleDelete = (e) => {
     props.deleteMessageRequest({ id: _id });
@@ -41,7 +41,7 @@ const MessageCard = (props) => {
       align='ss'
     >
       <Text color='white' weight='bold'>
-        {name}({mail}) - {format(new Date(date), 'dd/MM/yyyy - hh:mm')}
+        {name}({email}) - {format(new Date(date), 'dd/MM/yyyy - hh:mm')}
       </Text>
       <Box type='tertiary' direction='row' padding='none' align='ss'>
         <Box

@@ -3,7 +3,6 @@ import passport from 'passport';
 
 import response from '../../network/response';
 import service from './service';
-import scopesValidationHandler from '../../utils/middlewares/scopesValidationHandler';
 
 const router = express.Router();
 
