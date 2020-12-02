@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 import response from '../../network/response';
-import apiKeyService from './apiKeyService';
 import userService from './userService';
 
 const router = express.Router();
