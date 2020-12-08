@@ -12,6 +12,13 @@ const PortfolioInfoForm = ({ eventHandlers, formValues }) => {
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit}>
       <Box type='tertiary' direction='column' padding='none' align='se'>
+        <Input
+          title='Hero Text'
+          name='heroText'
+          type='textarea'
+          onChange={handleChange}
+          value={formValues.heroText}
+        />
         <Input title='CV (URL)' name='cvUrl' onChange={handleChange} value={formValues.cvUrl} />
         <Input
           title='About Message'
@@ -30,7 +37,9 @@ const PortfolioInfoForm = ({ eventHandlers, formValues }) => {
           title='Contact Text (2, Comma separated)'
           name='contactText'
           onChange={handleArrayChange}
-          value={formValues.contactText ? formValues.contactText.join(', ') : formValues.contactText}
+          value={
+            formValues.contactText ? formValues.contactText.join(', ') : formValues.contactText
+          }
         />
         <Input title='Email (URL)' name='email' onChange={handleChange} value={formValues.email} />
         <Input
