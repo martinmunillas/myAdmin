@@ -37,6 +37,12 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           value={formValues.mainImage}
         />
         <Input
+          title='Video (URL)'
+          name='video'
+          onChange={handleChange}
+          value={formValues.video}
+        />
+        <Input
           title='Images (URLs, comma separated)'
           name='images'
           onChange={handleArrayChange}
@@ -44,17 +50,15 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           value={formValues.images ? formValues.images.join(', ') : formValues.images}
         />
         <Input
-          title='Repositories (URLs, comma separated)'
-          name='repos'
-          onChange={handleArrayChange}
-          type='textarea'
-          value={formValues.repos ? formValues.repos.join(', ') : formValues.images}
+          title='Repository (URL)'
+          name='repo'
+          onChange={handleChange}
+          value={formValues.repos ? formValues.repos.join(', ') : formValues.repo}
         />
         <Input
-          title='Demo (URLs, comma separated)'
-          type='textarea'
-          name='demos'
-          onChange={handleArrayChange}
+          title='Demo (URL)'
+          name='demo'
+          onChange={handleChange}
           value={formValues.demos}
         />
         <Button color='red' type='submit'>

@@ -5,9 +5,10 @@ const projectSchema = new mongoose.Schema({
     service: {type: String, required: true},
     description: {type: String, required: true},
     mainImage: {type: String, required: true},
+    video: {type: String, required: true},
     images: {type: [String], required: true},
-    repos: {type: [String], required: true},
-    demos: {type: [String], required: true},
+    repo: {type: String, required: true},
+    demo: {type: String, required: true},
 })
 
 export default mongoose.model('projects', projectSchema)
