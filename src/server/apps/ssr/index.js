@@ -102,11 +102,20 @@ const renderApp = async (req, res) => {
         },
       });
 
+      const info = await axios({
+        method: 'GET',
+        url: `${URL}/api/info`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       return {
         user: { name, email, id },
         projects: projects.data.data,
         messages: messages.data.data,
         toDos: toDos.data.data,
+        info: info.data.data
       };
     } catch (error) {
       if (isDev) {

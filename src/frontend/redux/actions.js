@@ -161,6 +161,18 @@ export const editProjectRequest = (payload, id) => {
   };
 };
 
+export const setInfo = (payload) => {
+  return async (dispatch) => {
+    try {
+      await request(`/api/info`, 'put', payload);
+    } catch (error) {
+      dispatch(setError({ message: error.message, status: error.status || null }));
+    } finally {
+      dispatch(getState());
+    }
+  };
+};
+
 export const deleteProjectRequest = (payload) => {
   return async (dispatch) => {
     try {

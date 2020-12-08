@@ -8,9 +8,10 @@ import ReadMessages from '../pages/Messages/ReadMessages';
 import ToDo from '../pages/ToDo';
 import ProjectDetail from '../pages/Projects/ProjectDetail';
 import EditProject from '../pages/Projects/EditProject';
-import Settings from '../pages/Settings';
+import Settings from '../pages/Settings/Settings';
 import Ideas from '../pages/Ideas';
 import NotFound from '../pages/NotFound';
+import PortfolioInfo from'../pages/Settings/PortfolioInfo'
 
 const routes = [
   {
@@ -62,6 +63,11 @@ const routes = [
     exact: true,
     path: '/settings',
     component: Settings,
+  },
+  {
+    exact: true,
+    path: '/settings/portfolioInfo',
+    component: PortfolioInfo,
   },
   {
     exact: true,
