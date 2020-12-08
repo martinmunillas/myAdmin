@@ -53,13 +53,13 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           title='Repository (URL)'
           name='repo'
           onChange={handleChange}
-          value={formValues.repos ? formValues.repos.join(', ') : formValues.repo}
+          value={formValues.repo}
         />
         <Input
           title='Demo (URL)'
           name='demo'
           onChange={handleChange}
-          value={formValues.demos}
+          value={formValues.demo}
         />
         <Button color='red' type='submit'>
           Create
