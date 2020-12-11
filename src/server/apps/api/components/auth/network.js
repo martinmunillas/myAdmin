@@ -23,7 +23,6 @@ router.post('/sign-in', async (req, res) => {
           return response.error(req, res, error.message, error);
         }
 
-
         const { _id: id, name, email } = user;
 
         const payload = {
@@ -44,7 +43,7 @@ router.post('/sign-in', async (req, res) => {
   })(req, res);
 });
 
-router.post('/sign-up', async (req, res) => {
+router.post('/sign-up', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const createdUser = await userService.createUser(req.body);
     response.success(req, res, 201, 'User created correctly', createdUser);
