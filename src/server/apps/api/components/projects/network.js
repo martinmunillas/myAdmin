@@ -18,6 +18,15 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/all', async (req, res) => {
+  try {
+    const projects = await service.getAllProjects();
+    response.success(req, res, 200, 'Projects retrieved correctly', projects);
+  } catch (error) {
+    response.error(req, res, 500, error.message, error);
+  }
+});
+
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
   try {
     const projects = await service.addProject(req.body);

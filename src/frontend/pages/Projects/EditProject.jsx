@@ -10,8 +10,8 @@ import ProjectForm from '../../components/organisms/ProjectForm/ProjectForm';
 
 const EditProject = (props) => {
   const project = props.projects.find((project) => project._id == props.match.params.id);
-
   const [form, setForm] = useState(project);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -26,7 +26,15 @@ const EditProject = (props) => {
     });
   };
 
+  const handleCheckboxChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
   const handleSubmit = (e) => {
+    console.log(form)
     e.preventDefault();
     props.editProjectRequest(form, project._id);
   };
@@ -44,7 +52,7 @@ const EditProject = (props) => {
         marginTop='40'
       >
         <ProjectForm
-          eventHandlers={{ handleArrayChange, handleChange, handleSubmit }}
+          eventHandlers={{ handleArrayChange, handleChange, handleSubmit, handleCheckboxChange }}
           formValues={form}
         />
       </Box>

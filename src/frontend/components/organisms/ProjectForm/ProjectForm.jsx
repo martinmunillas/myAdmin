@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 import Box from '../../atoms/Box';
 import Button from '../../atoms/Button';
+import CheckBox from '../../atoms/CheckBox';
 import DoubleCell from '../../molecules/DoubleCell/DoubleCell';
 import Input from '../../molecules/Input/Input';
 
 const ProjectForm = ({ eventHandlers, formValues }) => {
-  const { handleSubmit, handleChange, handleArrayChange } = eventHandlers;
+  const { handleSubmit, handleChange, handleArrayChange, handleCheckboxChange } = eventHandlers;
 
   return (
     <form style={{ width: '100%' }} onSubmit={handleSubmit}>
@@ -36,12 +37,7 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           onChange={handleChange}
           value={formValues.mainImage}
         />
-        <Input
-          title='Video (URL)'
-          name='video'
-          onChange={handleChange}
-          value={formValues.video}
-        />
+        <Input title='Video (URL)' name='video' onChange={handleChange} value={formValues.video} />
         <Input
           title='Images (URLs, comma separated)'
           name='images'
@@ -55,11 +51,14 @@ const ProjectForm = ({ eventHandlers, formValues }) => {
           onChange={handleChange}
           value={formValues.repo}
         />
-        <Input
-          title='Demo (URL)'
-          name='demo'
-          onChange={handleChange}
-          value={formValues.demo}
+        <Input title='Demo (URL)' name='demo' onChange={handleChange} value={formValues.demo} />
+        <CheckBox
+          title='Visible?'
+          name='isVisible'
+          inputType='checkbox'
+          onChange={handleCheckboxChange}
+          checked={formValues.isVisible}
+          color='green'
         />
         <Button color='red' type='submit'>
           Create

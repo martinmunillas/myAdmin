@@ -41,12 +41,24 @@ const PortfolioInfoForm = ({ eventHandlers, formValues }) => {
             formValues.contactText ? formValues.contactText.join(', ') : formValues.contactText
           }
         />
-        <Input title='Email (URL)' name='email' onChange={handleChange} value={formValues.email} />
+        <Input title='Email' name='email' onChange={handleChange} value={formValues.email} />
         <Input
           title='Github (URL)'
           name='github'
           onChange={handleChange}
           value={formValues.github}
+        />
+        <Input
+          title='Linkedin (URL)'
+          name='linkedin'
+          onChange={handleChange}
+          value={formValues.linkedin}
+        />
+        <Input
+          title='YouTube (URL)'
+          name='youtube'
+          onChange={handleChange}
+          value={formValues.youtube}
         />
         <Button color='red' type='submit'>
           Create

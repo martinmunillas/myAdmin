@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { colors } from '../../utils/styleVars';
@@ -9,20 +9,27 @@ const Styled = styled.input`
   -webkit-appearance: none;
   background-color: white;
   vertical-align: middle;
-  border: 1px solid #ddd;
+  border: 1px solid #5f5f5f;
   outline: none;
   cursor: pointer;    
   border-radius: 50%;
+  align-self: flex-start;
 
   &:checked {
-    background: ${colors['black']};
+    background: ${(props) => colors[props.color]};
   }
 `;
 
-const CheckBox = ({ onChange }) => <Styled type='checkbox' onChange={onChange} />;
+const CheckBox = (props) => (
+  <Styled type='checkbox' {...props} />
+);
 
 CheckBox.propTypes = {
-    handleChange: PropTypes.func
-}
+  handleChange: PropTypes.func,
+};
+
+CheckBox.defaultProps = {
+  color: 'black',
+};
 
 export default CheckBox;

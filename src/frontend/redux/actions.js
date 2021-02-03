@@ -81,7 +81,7 @@ export const getState = () => {
   return async (dispatch) => {
     try {
       dispatch(setLoading());
-      const projects = await request(`/api/projects`);
+      const projects = await request(`/api/projects/all`);
 
       const messages = await request(`/api/messages`);
 
@@ -152,7 +152,9 @@ export const createProjectRequest = (payload) => {
 export const editProjectRequest = (payload, id) => {
   return async (dispatch) => {
     try {
+      console.log(payload)
       await request(`/api/projects/${id}`, 'put', payload);
+      console.log('hello')
 
       dispatch(editProject(payload));
     } catch (error) {

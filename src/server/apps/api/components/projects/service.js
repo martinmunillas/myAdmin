@@ -1,6 +1,10 @@
 import projectSchema from './schema';
 
 const getProjects = async () => {
+  return await (await projectSchema.find()).reverse().filter(project => project.isVisible);
+};
+
+const getAllProjects = async () => {
   return await (await projectSchema.find()).reverse();
 };
 
@@ -19,6 +23,7 @@ const deleteProject = async (id) => {
 export default {
   getProjects,
   addProject,
+  getAllProjects,
   updateProject,
   deleteProject,
 };

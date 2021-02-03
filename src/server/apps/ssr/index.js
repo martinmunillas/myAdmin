@@ -80,7 +80,7 @@ const renderApp = async (req, res) => {
       const { name, email, id, token } = req.cookies;
       const projects = await axios({
         method: 'GET',
-        url: `${URL}/api/projects`,
+        url: `${URL}/api/projects/all`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
