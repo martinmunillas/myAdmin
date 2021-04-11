@@ -87,17 +87,61 @@ export const getState = () => {
 
       const toDos = await request(`/api/toDos`);
 
+      const ideas = await request(`/api/ideas`);
+
       const state = {
         projects: projects.data.data,
         messages: messages.data.data,
         toDos: toDos.data.data,
+        ideas: ideas.data.data,
       };
 
       dispatch(setState(state));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     } finally {
       dispatch(unsetLoading());
+    }
+  };
+};
+
+export const newIdea = (payload) => {
+  return async (dispatch) => {
+    try {
+      await request(`/api/ideas`, 'post', { idea: 'New Idea' });
+      dispatch(getState());
+    } catch (error) {
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
+    }
+  };
+};
+
+export const updateIdea = (payload) => {
+  return async (dispatch) => {
+    try {
+      await request(`/api/ideas/${payload.id}`, 'put', { idea: payload.idea });
+      dispatch(getState());
+    } catch (error) {
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
+    }
+  };
+};
+
+export const deleteIdea = (payload) => {
+  return async (dispatch) => {
+    try {
+      await request(`/api/ideas/${payload.id}`, 'delete');
+      dispatch(getState());
+    } catch (error) {
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -108,7 +152,9 @@ export const deleteMessageRequest = (payload) => {
       await request(`/api/messages/${payload.id}`, 'delete');
       dispatch(deleteMessage({ id: payload.id }));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -119,7 +165,9 @@ export const readMessageRequest = (payload) => {
       await request(`/api/messages/${payload.id}/read`, 'put');
       dispatch(readMessage(payload));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -130,7 +178,9 @@ export const unreadMessageRequest = (payload) => {
       await request(`/api/messages/${payload.id}/unread`, 'put');
       dispatch(unreadMessage(payload));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -144,7 +194,9 @@ export const createProjectRequest = (payload) => {
       dispatch(getState());
     } catch (error) {
       console.log(error);
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -152,13 +204,15 @@ export const createProjectRequest = (payload) => {
 export const editProjectRequest = (payload, id) => {
   return async (dispatch) => {
     try {
-      console.log(payload)
+      console.log(payload);
       await request(`/api/projects/${id}`, 'put', payload);
-      console.log('hello')
+      console.log('hello');
 
       dispatch(editProject(payload));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -168,7 +222,9 @@ export const setInfo = (payload) => {
     try {
       await request(`/api/info`, 'put', payload);
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || null }));
+      dispatch(
+        setError({ message: error.message, status: error.status || null })
+      );
     } finally {
       dispatch(getState());
     }
@@ -182,7 +238,9 @@ export const deleteProjectRequest = (payload) => {
 
       dispatch(deleteProject(payload));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -195,7 +253,9 @@ export const createToDoRequest = (payload) => {
       dispatch(createToDo(payload));
       dispatch(getState());
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -207,7 +267,9 @@ export const completeToDoRequest = (payload) => {
 
       dispatch(completeToDo({ id: payload._id }));
     } catch (error) {
-      dispatch(setError({ message: error.message, status: error.status || 500 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 500 })
+      );
     }
   };
 };
@@ -233,7 +295,9 @@ export const loginRequest = ({ email, password }, redirectUrl) => {
       window.location.href = redirectUrl;
     } catch (error) {
       console.log(error);
-      dispatch(setError({ message: error.message, status: error.status || 401 }));
+      dispatch(
+        setError({ message: error.message, status: error.status || 401 })
+      );
     } finally {
       dispatch(unsetLoading());
     }

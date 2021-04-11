@@ -9,7 +9,7 @@ const keepIdea = async (idea) => {
 };
 
 const upgradeIdea = async (idea, id) => {
-  return await ideasSchems.updateOne({ _id: id }, idea).save();
+  return await ideasSchems.updateOne({ _id: id }, idea);
 };
 
 const deleteIdea = async (id) => {

@@ -78,6 +78,15 @@ const renderApp = async (req, res) => {
   const getInitialState = async () => {
     try {
       const { name, email, id, token } = req.cookies;
+      
+      const ideas = await axios({
+        method: 'GET',
+        url: `${URL}/api/ideas`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       const projects = await axios({
         method: 'GET',
         url: `${URL}/api/projects/all`,
@@ -115,7 +124,8 @@ const renderApp = async (req, res) => {
         projects: projects.data.data,
         messages: messages.data.data,
         toDos: toDos.data.data,
-        info: info.data.data
+        info: info.data.data,
+        ideas: ideas.data.data
       };
     } catch (error) {
       if (isDev) {
